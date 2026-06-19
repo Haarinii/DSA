@@ -1,9 +1,19 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        n=len(nums)
-        frq={}
+        element=None
+        count=0
         for i in nums:
-            frq[i]=frq.get(i,0)+1
-        for i in frq:
-            if frq[i]>n//2:
-                return i
+            if count==0:
+                count+=1
+                element= i
+            elif i==element:
+                count+=1
+            else:
+                count-=1
+        check=0
+        for i in nums:
+            if i== element:
+                check+=1
+        if check> len(nums)//2:
+            return element
+        return -1
