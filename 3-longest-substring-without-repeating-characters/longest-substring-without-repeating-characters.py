@@ -1,10 +1,12 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        sub_str=[]
-        maxx=0
-        for i in s:
-            while i in sub_str:
-                sub_str.pop(0)
-            sub_str.append(i)
-            maxx=max(maxx, len(sub_str))
-        return maxx
+        n=len(s)
+        hashtab=[-1]*256
+        left=maxlen=0
+        for right in range(n):
+            if hashtab[ord(s[right])]!=-1:
+                left=max(hashtab[ord(s[right])]+1,left)
+            length=right-left+1
+            maxlen=max(maxlen, length)
+            hashtab[ord(s[right])]=right
+        return maxlen
